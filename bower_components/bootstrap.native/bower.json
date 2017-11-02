@@ -1,0 +1,23 @@
+{
+  "name": "bootstrap.native",
+  "version": "2.0.18",
+  "homepage": "http://thednp.github.io/bootstrap.native/",
+  "authors": [
+    "dnp_theme"
+  ],
+  "description": "Native Javascript for Bootstrap, the sweetest Javascript library without jQuery.",
+  "main": "dist/bootstrap-native.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [ "bootstrap.native", "bootstrap", "vanilla js", "native javascript", "vanilla javascript" ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "albatross",
+  "version": "0.0.1",
+  "description": "Home Automation System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Josh Walwyn <me@joshwalwyn.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2"
+  }
+}
