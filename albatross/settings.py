@@ -134,3 +134,7 @@ LOGIN_REQUIRED_URLS_EXCEPTIONS = (
     r'^/logout',
     r'^/admin/',
 )
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)

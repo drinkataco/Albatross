@@ -11,11 +11,76 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
+          // AdminLITE CSS/JS
           {
             expand: true,
-            src: ['bower_components/admin-lite/dist/css/AdminLTE.min.css'],
-            cwd: 'src',
-            dest: 'static/vendor/admin-lite/'
+            src: ['bower_components/admin-lite/dist/css/*'],
+            flatten: true,
+            dest: 'static/vendor/admin-lite/css'
+          },
+          {
+            expand: true,
+            src: ['bower_components/admin-lite/dist/js/*'],
+            flatten: true,
+            dest: 'static/vendor/admin-lite/js/'
+          },
+          // Velocity
+          {
+            expand: true,
+            src: ['bower_components/velocity/velocity.min.js'],
+            flatten: true,
+            dest: 'static/vendor/velocity/js'
+          },
+          // Bootstrap
+          {
+            expand: true,
+            src: ['bower_components/bootstrap/dist/css/*'],
+            flatten: true,
+            dest: 'static/vendor/boostrap/css'
+          },
+          {
+            expand: true,
+            src: ['bower_components/bootstrap/dist/fonts/*'],
+            flatten: true,
+            dest: 'static/vendor/boostrap/fonts'
+          },
+          // Boostrap Native
+          {
+            expand: true,
+            src: ['bower_components/bootstrap.native/dist/bootstrap-native.js'],
+            flatten: true,
+            dest: 'static/vendor/boostrap.native/js'
+          },
+          // Font Awesome fonts and CSS
+          {
+            expand: true,
+            src: ['bower_components/font-awesome/css/font-awesome.min.css'],
+            flatten: true,
+            dest: 'static/vendor/font-awesome/css'
+          },
+          {
+            expand: true,
+            src: ['bower_components/font-awesome/fonts/*'],
+            flatten: true,
+            dest: 'static/vendor/font-awesome/fonts'
+          },
+          {
+            expand: true,
+            src: ['bower_components/Ionicons/css/*'],
+            flatten: true,
+            dest: 'static/vendor/Ionicons/css'
+          },
+          {
+            expand: true,
+            src: ['bower_components/Ionicons/fonts/*'],
+            flatten: true,
+            dest: 'static/vendor/Ionicons/fonts'
+          },
+          {
+            expand: true,
+            src: ['bower_components/Ionicons/png/*'],
+            flatten: true,
+            dest: 'static/vendor/Ionicons/png'
           },
         ],
       },
