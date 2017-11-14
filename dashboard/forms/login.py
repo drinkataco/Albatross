@@ -12,3 +12,6 @@ class LoginForm(forms.Form):
                                max_length=1000,
                                required=True,
                                widget=forms.PasswordInput())
+    # Contains redirect info
+    next_page = forms.CharField(required=True,
+                                widget=forms.HiddenInput())

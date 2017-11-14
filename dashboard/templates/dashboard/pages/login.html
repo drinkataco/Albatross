@@ -9,19 +9,29 @@
     <b>Alba</b>tross
   </div>
   <!-- /.login-logo -->
+
   <div class="login-box-body">
 
     <form action="/login/" method="post">
-      <p class="">
-        {% if form.errors %}
-          Please enter a valid username and password
-        {% endif %}
-      </p>
+      {% if form.errors %}
+        <p class="text-center">
+            <i class="fa fa-fw fa-warning"></i> Please enter a valid username and password
+        </p>
+      {% elif request.GET.next %}
+        <p class="text-center">
+          <i class="fa fa-fw fa-warning"></i> You must be logged in to view this page
+        </p>
+      {% elif request.GET.bye %}
+        <p class="text-center">
+          <i class="fa fa-fw fa-check"></i> You have successfully logged out
+        </p>
+      {% endif %}
+
       <div class="form-group has-feedback {% if form.errors %}has-error{% endif %}">
-        {{ form.username|attr:"placeholder:Username"|add_class:"form-control" }}
+          {% render_field form.username placeholder='Username' class="form-control" %}
       </div>
       <div class="form-group has-feedback {% if form.errors %}has-error{% endif %}">
-        {{ form.password|attr:"placeholder:Password"|add_class:"form-control" }}
+        {% render_field form.password placeholder='Password' class="form-control" %}
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -33,7 +43,9 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <input type="hidden" value="/" id="next">
+          {% with request.GET.next|default:"/" as next_def %}
+            {% render_field form.next_page value=next_def %}
+          {% endwith %}
           {% csrf_token %}
           <button type="submit" class="btn btn-block btn-flat">Sign In</button>
         </div>
