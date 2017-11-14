@@ -11,6 +11,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'Django',
+        'django-widget-tweaks',
     ],
     setup_requires=[
         'pytest-runner',

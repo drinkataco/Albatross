@@ -14,7 +14,7 @@ module.exports = function(grunt) {
           // AdminLITE CSS/JS
           {
             expand: true,
-            src: ['bower_components/admin-lite/dist/css/*'],
+            src: ['bower_components/admin-lite/dist/css/**'],
             flatten: true,
             dest: 'static/vendor/admin-lite/css'
           },
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
             expand: true,
             src: ['bower_components/bootstrap.native/dist/bootstrap-native.js'],
             flatten: true,
-            dest: 'static/vendor/boostrap.native/js'
+            dest: 'static/vendor/bootstrap.native/js'
           },
           // Font Awesome fonts and CSS
           {

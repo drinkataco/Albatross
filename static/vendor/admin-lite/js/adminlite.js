@@ -237,6 +237,8 @@ class Tree {
     parentLi.classList.add(this.ClassName.open);
 
     const firstTree = tree[0]; // Only the direct descendant needs to be closed
+    console.log('expand');
+    console.log(Velocity);
     if (typeof Velocity === 'undefined') {
       firstTree.style.display = 'block';
       this.element.dispatchEvent(new CustomEvent(this.Event.expanded));

@@ -50,6 +50,7 @@ class RequiredLoginMiddleware(object):
 
     def __call__(self, request):
         """
+        Default Call method
         """
         return self.get_response(request)
 
