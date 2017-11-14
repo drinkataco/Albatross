@@ -410,9 +410,13 @@ var PushMenu = function () {
     });
 
     // Fix for android devices
-    this.body.querySelector(this.Selector.searchInput).addEventListener('click', function (e) {
-      e.stopPropagation();
-    });
+    var searchInput = this.body.querySelector(this.Selector.searchInput);
+
+    if (searchInput) {
+      searchInput.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+    }
 
     // Bind functionality to close/open sidebar
     this.setUpListeners();

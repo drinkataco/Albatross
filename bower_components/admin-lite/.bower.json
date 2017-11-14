@@ -33,13 +33,13 @@
     "Ionicons": "ionicons#^2.0.1",
     "babel-polyfill": "^0.0.1"
   },
-  "_release": "8e8996951d",
+  "_release": "91d2f54511",
   "_resolution": {
     "type": "commit",
-    "commit": "8e8996951dcd5867f39212d370a097812955be3a"
+    "commit": "91d2f545118da7d2fb0059596231933b84b3e230"
   },
   "_source": "https://github.com/drinkataco/AdminLite.git",
-  "_target": "8e8996951dcd5867f39212d370a097812955be3a",
+  "_target": "91d2f545118da7d2fb0059596231933b84b3e230",
   "_originalSource": "https://github.com/drinkataco/AdminLite.git",
   "_direct": true
 }

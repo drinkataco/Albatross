@@ -14,5 +14,14 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "velocity": "^1.5.0",
+    "bootstrap.native": "^2.0.17",
+    "Ionicons": "ionicons#^2.0.1",
+    "babel-polyfill": "^0.0.1",
+    "admin-lite": "https://github.com/drinkataco/AdminLite.git#91d2f545118da7d2fb0059596231933b84b3e230"
+  }
 }

@@ -73,14 +73,16 @@ class PushMenu {
       );
 
     // Fix for android devices
-    this.body.querySelector(this.Selector.searchInput)
-      .addEventListener(
+    const searchInput = this.body.querySelector(this.Selector.searchInput);
+
+    if (searchInput) {
+      searchInput.addEventListener(
         'click',
         (e) => {
           e.stopPropagation();
         },
       );
-
+    }
 
     // Bind functionality to close/open sidebar
     this.setUpListeners();
