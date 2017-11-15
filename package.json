@@ -1,18 +1,15 @@
 {
   "name": "albatross",
   "version": "0.0.1",
-  "description": "Home Automation System",
+  "description": "A Dashboard for your Smart Home",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "repository": "git@github.com:drinkataco/Albatross.git",
   "author": "Josh Walwyn <me@joshwalwyn.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "load-grunt-tasks": "^3.5.2"
+    "eslint": "^4.11.0"
+  },
+  "dependencies": {
+    "AdminLite": "https://github.com/drinkataco/AdminLite.git#91d2f545118da7d2fb0059596231933b84b3e230"
   }
 }
