@@ -7,7 +7,9 @@
   "author": "Josh Walwyn <me@joshwalwyn.com>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^4.11.0"
+    "eslint": "^4.11.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
     "AdminLite": "https://github.com/drinkataco/AdminLite.git#91d2f545118da7d2fb0059596231933b84b3e230"
