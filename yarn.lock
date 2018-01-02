@@ -2,13 +2,15 @@
 # yarn lockfile v1
 
 
-"AdminLite@https://github.com/drinkataco/AdminLite.git#91d2f545118da7d2fb0059596231933b84b3e230":
-  version "0.0.1-alpha"
-  resolved "https://github.com/drinkataco/AdminLite.git#91d2f545118da7d2fb0059596231933b84b3e230"
+"AdminLite@https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f":
+  version "0.1"
+  resolved "https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f"
   dependencies:
     bootstrap "^3.3.7"
+    bootstrap.native "^2.0.19"
     font-awesome "^4.7.0"
-    velocity "^0.7.2"
+    ionicons "^3.0.0"
+    velocity-animate "^1.5.0"
 
 abbrev@1:
   version "1.1.1"
@@ -297,6 +299,10 @@ boom@2.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
+
+bootstrap.native@^2.0.19:
+  version "2.0.21"
+  resolved "https://registry.yarnpkg.com/bootstrap.native/-/bootstrap.native-2.0.21.tgz#8368fd66bbd2c36c461ac6497fe4ca8ca4deba86"
 
 bootstrap@^3.3.7:
   version "3.3.7"
@@ -1635,6 +1641,10 @@ interpret@^1.0.0:
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
+
+ionicons@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-3.0.0.tgz#40b8daf4fd7a31150bd002160f66496e22a98c3c"
 
 ip@^1.1.0, ip@^1.1.5:
   version "1.1.5"
@@ -3279,6 +3289,10 @@ validate-npm-package-license@^3.0.1:
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+
+velocity-animate@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/velocity-animate/-/velocity-animate-1.5.0.tgz#fc8771d8dfe1136ff02a707e10fbb0957c4b030f"
 
 velocity@^0.7.2:
   version "0.7.2"

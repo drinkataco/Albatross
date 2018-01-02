@@ -12,6 +12,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
-    "AdminLite": "https://github.com/drinkataco/AdminLite.git#91d2f545118da7d2fb0059596231933b84b3e230"
+    "AdminLite": "https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f",
+    "velocity": "^0.7.2"
   }
 }
