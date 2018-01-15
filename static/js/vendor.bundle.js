@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -154,31 +154,290 @@ exports.default = Utilities;
 "use strict";
 
 
-var _velocityAnimate = __webpack_require__(2);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* global Velocity */
+
+
+var _Utilities = __webpack_require__(0);
+
+var _Utilities2 = _interopRequireDefault(_Utilities);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* Tree()
+ * ======
+ * Converts a nested list into a multilevel
+ * tree view menu.
+ *
+ * @author Josh Walwyn <me@joshwalwyn.com>
+ *
+ * Adapted from Admin LTE Tree.js jQuery Plugin
+ *
+ * @Usage: new Tree(element, options)
+ *         Add [data-widget="tree"] to the ul element
+ *         Pass any option as data-option-name="value"
+ */
+var Tree = function () {
+  _createClass(Tree, null, [{
+    key: 'bind',
+
+    /**
+     * Binds listeners onto sidebar elements
+     */
+    value: function bind() {
+      Array.prototype.forEach.call(document.querySelectorAll(Tree.Selector.data), function (element) {
+        return new Tree(element);
+      });
+    }
+
+    /**
+     * Opens existing active element(s) and calls method to bind
+     * click event listeners onto the sidebar itself
+     * @param {Object} element The main sidebar element
+     * @param {Object|null} options list of options
+     * @param {Object|null} classNames list of classnames
+     * @param {Object|null} selectors list of dom selectors
+     * @param {Object|null} events list of event names
+     */
+
+  }]);
+
+  function Tree(element, options, classNames, selectors, events) {
+    _classCallCheck(this, Tree);
+
+    // Add parameters to global scope
+    this.Default = Tree.Default;
+    this.ClassName = classNames || Tree.ClassName;
+    this.Selector = selectors || Tree.Selector;
+    this.Event = events || Tree.Event;
+    this.element = element;
+    this.element.classList.add(this.ClassName.tree);
+
+    // Set options here
+    this.options = _Utilities2.default.grabOptions(this.Default, options, this.element);
+
+    // Open menu for active element
+    var active = this.element.querySelector(this.Selector.activeTreeview);
+
+    if (active !== null) {
+      active.classList.add(this.ClassName.open);
+    }
+
+    // bind listeners
+    this.setUpListeners();
+  }
+
+  /**
+   * Binds an event listener to each parent menu element
+   * @return {Object}
+   */
+
+
+  _createClass(Tree, [{
+    key: 'setUpListeners',
+    value: function setUpListeners() {
+      var _this = this;
+
+      // Binds a click event listener for each element
+      Array.prototype.forEach.call(this.element.querySelectorAll(this.options.trigger), function (context) {
+        context.addEventListener('click', function (event) {
+          _this.toggle(context, event);
+        });
+      });
+    }
+
+    /**
+     * Handle show/hide of collapsible menus
+     * @param {Object} link  The link element clicked
+     * @param {Object} event The Triggered Event
+     */
+
+  }, {
+    key: 'toggle',
+    value: function toggle(link, event) {
+      // Get contextual DOM elements
+      var parentLi = link.parentNode;
+      var isOpen = parentLi.classList.contains(this.ClassName.open);
+      var treeviewMenu = _Utilities2.default.findChildren('UL', this.ClassName.treeviewMenu, parentLi);
+
+      // Stop if not a menu tree
+      if (!parentLi.classList.contains(this.ClassName.treeview)) {
+        return;
+      }
+
+      // Stop link follow
+      if (!this.options.followLink || link.getAttribute('href') === '#') {
+        event.preventDefault();
+      }
+
+      // Open or close depending on current statw
+      if (isOpen) {
+        this.collapse(treeviewMenu, parentLi);
+      } else {
+        this.expand(treeviewMenu, parentLi);
+      }
+    }
+
+    /**
+     * Collapse element
+     * @param {Object} tree     The child tree/menu
+     * @param {Object} parentLi The parent element that contains the tree
+     */
+
+  }, {
+    key: 'collapse',
+    value: function collapse(tree, parentLi) {
+      var _this2 = this;
+
+      parentLi.classList.remove(this.ClassName.open);
+
+      var treeLocal = tree;
+
+      Array.prototype.forEach.call(treeLocal, function (t) {
+        var treeItem = t;
+        if (typeof Velocity === 'undefined') {
+          treeItem.style.display = 'none';
+          _this2.element.dispatchEvent(new CustomEvent(_this2.Event.collapsed));
+        } else {
+          Velocity(treeItem, 'slideUp', {
+            easing: _this2.options.easing,
+            duration: _this2.options.animationSpeed
+          }).then(function () {
+            // Call custom event to indicate collapse
+            _this2.element.dispatchEvent(new CustomEvent(_this2.Event.collapsed));
+          });
+        }
+      });
+    }
+
+    /**
+     * Expand menu selection, and close all siblings
+     * @param {Object} tree     The child tree/menu
+     * @param {Object} parentLi The parent element that contains the tree
+     */
+
+  }, {
+    key: 'expand',
+    value: function expand(tree, parentLi) {
+      var _this3 = this;
+
+      // We need to access direct siblings to support multilevel menus remaining open
+      var openMenus = _Utilities2.default.findChildren('LI', this.ClassName.open, parentLi.parentNode);
+
+      // For each currently opened menu (which should be just 1) we should close
+      if (this.options.accordion) {
+        Array.prototype.forEach.call(openMenus, function (menu) {
+          var openTree = _Utilities2.default.findChildren('UL', _this3.ClassName.treeviewMenu, menu);
+
+          // Collapse
+          _this3.collapse(openTree, menu);
+        });
+      }
+
+      // Open this menu
+      parentLi.classList.add(this.ClassName.open);
+
+      var firstTree = tree[0]; // Only the direct descendant needs to be closed
+      if (typeof Velocity === 'undefined') {
+        firstTree.style.display = 'block';
+        this.element.dispatchEvent(new CustomEvent(this.Event.expanded));
+      } else {
+        Velocity(firstTree, 'slideDown', {
+          easing: this.options.easing,
+          duration: this.options.animationSpeed
+        }).then(function () {
+          // Call custom event to indicate expansion
+          _this3.element.dispatchEvent(new CustomEvent(_this3.Event.expanded));
+        });
+      }
+    }
+  }]);
+
+  return Tree;
+}();
+
+/**
+ * Default Options
+ * @type {Object}
+ */
+
+
+Tree.Default = {
+  animationSpeed: 300,
+  accordion: true,
+  followLink: true,
+  trigger: '.treeview a',
+  easing: 'easeInSine'
+};
+
+/**
+ * Selectors for query selections
+ * @type {Object}
+ */
+Tree.Selector = {
+  data: '[data-widget="tree"]',
+  activeTreeview: '.treeview.active'
+};
+
+/**
+ * DOM Class Names
+ * @type {Object}
+ */
+Tree.ClassName = {
+  open: 'menu-open',
+  tree: 'tree',
+  treeview: 'treeview',
+  treeviewMenu: 'treeview-menu'
+};
+
+/**
+ * Custom Events
+ * @type {Object}
+ */
+Tree.Event = {
+  expanded: 'tree_expanded',
+  collapsed: 'tree_collapsed'
+};
+
+exports.default = Tree;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _velocityAnimate = __webpack_require__(3);
 
 var _velocityAnimate2 = _interopRequireDefault(_velocityAnimate);
 
-var _bootstrap = __webpack_require__(4);
+var _bootstrap = __webpack_require__(5);
 
 var _bootstrap2 = _interopRequireDefault(_bootstrap);
 
-var _BoxRefresh = __webpack_require__(6);
+var _BoxRefresh = __webpack_require__(7);
 
 var _BoxRefresh2 = _interopRequireDefault(_BoxRefresh);
 
-var _BoxWidget = __webpack_require__(7);
+var _BoxWidget = __webpack_require__(8);
 
 var _BoxWidget2 = _interopRequireDefault(_BoxWidget);
 
-var _ControlSidebar = __webpack_require__(8);
+var _ControlSidebar = __webpack_require__(9);
 
 var _ControlSidebar2 = _interopRequireDefault(_ControlSidebar);
 
-var _DirectChat = __webpack_require__(9);
+var _DirectChat = __webpack_require__(10);
 
 var _DirectChat2 = _interopRequireDefault(_DirectChat);
 
-var _Layout = __webpack_require__(10);
+var _Layout = __webpack_require__(11);
 
 var _Layout2 = _interopRequireDefault(_Layout);
 
@@ -190,10 +449,35 @@ var _TodoList = __webpack_require__(13);
 
 var _TodoList2 = _interopRequireDefault(_TodoList);
 
+var _Tree = __webpack_require__(1);
+
+var _Tree2 = _interopRequireDefault(_Tree);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Bind admin-lite modules
+
+
+// admin-lite
+// velocity-animation
+var binder = function binder() {
+  _BoxRefresh2.default.bind();
+  _BoxWidget2.default.bind();
+  _ControlSidebar2.default.bind();
+  _DirectChat2.default.bind();
+  _Layout2.default.bind();
+  _PushMenu2.default.bind();
+  _TodoList2.default.bind();
+  _Tree2.default.bind();
+};
+
+// Bootstrap native
+
+
+document.addEventListener('DOMContentLoaded', binder);
+
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4921,10 +5205,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* The CSS spec mandates that the translateX/Y/Z transforms are %-relative to the element itself -- not its parent.
  Velocity, however, doesn't make this distinction. Thus, converting to or from the % unit with these subproperties
  will produce an inaccurate conversion value. The same issue exists with the cx/cy attributes of SVG circles and ellipses. */
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4954,7 +5238,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7098,10 +7382,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     Tooltip: Tooltip
   };
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7131,7 +7415,7 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7386,7 +7670,7 @@ BoxRefresh.Selector = {
 exports.default = BoxRefresh;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7686,7 +7970,7 @@ BoxWidget.Event = {
 exports.default = BoxWidget;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7891,7 +8175,7 @@ ControlSidebar.Event = {
 exports.default = ControlSidebar;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8006,7 +8290,7 @@ DirectChat.ClassName = {
 exports.default = DirectChat;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8022,7 +8306,7 @@ var _Utilities = __webpack_require__(0);
 
 var _Utilities2 = _interopRequireDefault(_Utilities);
 
-var _Tree = __webpack_require__(11);
+var _Tree = __webpack_require__(1);
 
 var _Tree2 = _interopRequireDefault(_Tree);
 
@@ -8261,265 +8545,6 @@ Layout.ClassName = {
 };
 
 exports.default = Layout;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* global Velocity */
-
-
-var _Utilities = __webpack_require__(0);
-
-var _Utilities2 = _interopRequireDefault(_Utilities);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/* Tree()
- * ======
- * Converts a nested list into a multilevel
- * tree view menu.
- *
- * @author Josh Walwyn <me@joshwalwyn.com>
- *
- * Adapted from Admin LTE Tree.js jQuery Plugin
- *
- * @Usage: new Tree(element, options)
- *         Add [data-widget="tree"] to the ul element
- *         Pass any option as data-option-name="value"
- */
-var Tree = function () {
-  _createClass(Tree, null, [{
-    key: 'bind',
-
-    /**
-     * Binds listeners onto sidebar elements
-     */
-    value: function bind() {
-      Array.prototype.forEach.call(document.querySelectorAll(Tree.Selector.data), function (element) {
-        return new Tree(element);
-      });
-    }
-
-    /**
-     * Opens existing active element(s) and calls method to bind
-     * click event listeners onto the sidebar itself
-     * @param {Object} element The main sidebar element
-     * @param {Object|null} options list of options
-     * @param {Object|null} classNames list of classnames
-     * @param {Object|null} selectors list of dom selectors
-     * @param {Object|null} events list of event names
-     */
-
-  }]);
-
-  function Tree(element, options, classNames, selectors, events) {
-    _classCallCheck(this, Tree);
-
-    // Add parameters to global scope
-    this.Default = Tree.Default;
-    this.ClassName = classNames || Tree.ClassName;
-    this.Selector = selectors || Tree.Selector;
-    this.Event = events || Tree.Event;
-    this.element = element;
-    this.element.classList.add(this.ClassName.tree);
-
-    // Set options here
-    this.options = _Utilities2.default.grabOptions(this.Default, options, this.element);
-
-    // Open menu for active element
-    var active = this.element.querySelector(this.Selector.activeTreeview);
-
-    if (active !== null) {
-      active.classList.add(this.ClassName.open);
-    }
-
-    // bind listeners
-    this.setUpListeners();
-  }
-
-  /**
-   * Binds an event listener to each parent menu element
-   * @return {Object}
-   */
-
-
-  _createClass(Tree, [{
-    key: 'setUpListeners',
-    value: function setUpListeners() {
-      var _this = this;
-
-      // Binds a click event listener for each element
-      Array.prototype.forEach.call(this.element.querySelectorAll(this.options.trigger), function (context) {
-        context.addEventListener('click', function (event) {
-          _this.toggle(context, event);
-        });
-      });
-    }
-
-    /**
-     * Handle show/hide of collapsible menus
-     * @param {Object} link  The link element clicked
-     * @param {Object} event The Triggered Event
-     */
-
-  }, {
-    key: 'toggle',
-    value: function toggle(link, event) {
-      // Get contextual DOM elements
-      var parentLi = link.parentNode;
-      var isOpen = parentLi.classList.contains(this.ClassName.open);
-      var treeviewMenu = _Utilities2.default.findChildren('UL', this.ClassName.treeviewMenu, parentLi);
-
-      // Stop if not a menu tree
-      if (!parentLi.classList.contains(this.ClassName.treeview)) {
-        return;
-      }
-
-      // Stop link follow
-      if (!this.options.followLink || link.getAttribute('href') === '#') {
-        event.preventDefault();
-      }
-
-      // Open or close depending on current statw
-      if (isOpen) {
-        this.collapse(treeviewMenu, parentLi);
-      } else {
-        this.expand(treeviewMenu, parentLi);
-      }
-    }
-
-    /**
-     * Collapse element
-     * @param {Object} tree     The child tree/menu
-     * @param {Object} parentLi The parent element that contains the tree
-     */
-
-  }, {
-    key: 'collapse',
-    value: function collapse(tree, parentLi) {
-      var _this2 = this;
-
-      parentLi.classList.remove(this.ClassName.open);
-
-      var treeLocal = tree;
-
-      Array.prototype.forEach.call(treeLocal, function (t) {
-        var treeItem = t;
-        if (typeof Velocity === 'undefined') {
-          treeItem.style.display = 'none';
-          _this2.element.dispatchEvent(new CustomEvent(_this2.Event.collapsed));
-        } else {
-          Velocity(treeItem, 'slideUp', {
-            easing: _this2.options.easing,
-            duration: _this2.options.animationSpeed
-          }).then(function () {
-            // Call custom event to indicate collapse
-            _this2.element.dispatchEvent(new CustomEvent(_this2.Event.collapsed));
-          });
-        }
-      });
-    }
-
-    /**
-     * Expand menu selection, and close all siblings
-     * @param {Object} tree     The child tree/menu
-     * @param {Object} parentLi The parent element that contains the tree
-     */
-
-  }, {
-    key: 'expand',
-    value: function expand(tree, parentLi) {
-      var _this3 = this;
-
-      // We need to access direct siblings to support multilevel menus remaining open
-      var openMenus = _Utilities2.default.findChildren('LI', this.ClassName.open, parentLi.parentNode);
-
-      // For each currently opened menu (which should be just 1) we should close
-      if (this.options.accordion) {
-        Array.prototype.forEach.call(openMenus, function (menu) {
-          var openTree = _Utilities2.default.findChildren('UL', _this3.ClassName.treeviewMenu, menu);
-
-          // Collapse
-          _this3.collapse(openTree, menu);
-        });
-      }
-
-      // Open this menu
-      parentLi.classList.add(this.ClassName.open);
-
-      var firstTree = tree[0]; // Only the direct descendant needs to be closed
-      if (typeof Velocity === 'undefined') {
-        firstTree.style.display = 'block';
-        this.element.dispatchEvent(new CustomEvent(this.Event.expanded));
-      } else {
-        Velocity(firstTree, 'slideDown', {
-          easing: this.options.easing,
-          duration: this.options.animationSpeed
-        }).then(function () {
-          // Call custom event to indicate expansion
-          _this3.element.dispatchEvent(new CustomEvent(_this3.Event.expanded));
-        });
-      }
-    }
-  }]);
-
-  return Tree;
-}();
-
-/**
- * Default Options
- * @type {Object}
- */
-
-
-Tree.Default = {
-  animationSpeed: 300,
-  accordion: true,
-  followLink: true,
-  trigger: '.treeview a',
-  easing: 'easeInSine'
-};
-
-/**
- * Selectors for query selections
- * @type {Object}
- */
-Tree.Selector = {
-  data: '[data-widget="tree"]',
-  activeTreeview: '.treeview.active'
-};
-
-/**
- * DOM Class Names
- * @type {Object}
- */
-Tree.ClassName = {
-  open: 'menu-open',
-  tree: 'tree',
-  treeview: 'treeview',
-  treeviewMenu: 'treeview-menu'
-};
-
-/**
- * Custom Events
- * @type {Object}
- */
-Tree.Event = {
-  expanded: 'tree_expanded',
-  collapsed: 'tree_collapsed'
-};
-
-exports.default = Tree;
 
 /***/ }),
 /* 12 */

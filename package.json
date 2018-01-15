@@ -2,7 +2,7 @@
   "name": "albatross",
   "version": "0.0.1",
   "description": "A Dashboard for your Smart Home",
-  "main": "index.js",
+  "main": "build/js/albatross.js",
   "repository": "git@github.com:drinkataco/Albatross.git",
   "author": "Josh Walwyn <me@joshwalwyn.com>",
   "license": "MIT",
@@ -22,8 +22,5 @@
   "dependencies": {
     "AdminLite": "https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f",
     "velocity": "^0.7.2"
-  },
-  "scripts": {
-    "webpack": "webpack"
   }
 }
