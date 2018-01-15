@@ -6,16 +6,16 @@ const Babel = require('babel-loader');
 module.exports = {
   context: path.resolve(__dirname, '.'),
   entry: {
-    'bundle': './albatross.js',
-    'bundle.min': './albatross.js',
-    // 'bundle.min.css': [
+    'js/vendor.bundle.js': './albatross.js',
+    'js/vendor.bundle.min.js': './albatross.js',
+    // 'css/vendor.css': [
     //   './node_modules/bootstrap/dist/css/bootstrap.css'
     // ],
   },
 
   output: {
-    path: path.resolve(__dirname, 'static/js'),
-    filename: 'albatross.[name].js',
+    path: path.resolve(__dirname, 'static'),
+    filename: '[name]',
   },
 
   module: {
