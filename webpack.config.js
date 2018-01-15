@@ -1,16 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const Babel = require('babel-loader');
+const cssLoader = require('css-loader');
+const styleLoader = require('style-loader');
+const fileLoader = require('file-loader');
 
 module.exports = {
   context: path.resolve(__dirname, '.'),
   entry: {
-    'js/vendor.bundle.js': './albatross.js',
+    'js/vendor.bundle.js':     './albatross.js',
     'js/vendor.bundle.min.js': './albatross.js',
-    // 'css/vendor.css': [
-    //   './node_modules/bootstrap/dist/css/bootstrap.css'
-    // ],
+    'css/vendor.css': [
+      './node_modules/bootstrap/dist/css/bootstrap.css',
+      './node_modules/adminlite/dist/css/styles.min.css'
+    ],
   },
 
   output: {
@@ -19,7 +25,7 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       // transpile ES6/7 to ES5 via babel
       {
         test: /\.js$/,
@@ -28,15 +34,13 @@ module.exports = {
              presets: ['env']
          }
       },
-    ],
-    // rules: [
-    //   {
-    //     test: /\.css$/,
-    //     use: ExtractTextPlugin.extract({
-    //       fallback: 'style-loader',
-    //       use: 'css-loader'
-    //     })
-    //   },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
+      },
     //   {
     //     test: /\.scss$/,
     //     loaders: ['style', 'css', 'postcss', 'sass']
@@ -45,19 +49,19 @@ module.exports = {
     //     test: /\.less$/,
     //     loaders: ['style', 'css', 'less']
     //   },
-    //   {
-    //     test: /\.woff$/,
-    //     loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[path][name].[ext]"
-    //   },
-    //   {
-    //     test: /\.woff2$/,
-    //     loader: "url-loader?limit=10000&mimetype=application/font-woff2&name=[path][name].[ext]"
-    //   },
-    //   {
-    //     test: /\.(eot|ttf|svg|gif|png)$/,
-    //     loader: "file-loader"
-    //   }
-    // ],
+      {
+        test: /\.woff$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[path][name].[ext]"
+      },
+      {
+        test: /\.woff2$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff2&name=[path][name].[ext]"
+      },
+      {
+        test: /\.(eot|ttf|svg|gif|png)$/,
+        loader: "file-loader"
+      },
+    ],
   },
 
   // Uglify JS
@@ -65,7 +69,8 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       minimize: true
-    })
+    }),
+    new ExtractTextPlugin("css/vendor.css"),
   ],
 
   devtool: 'source-map',
