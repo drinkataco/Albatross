@@ -14,7 +14,7 @@ module.exports = {
     'js/vendor.bundle.js':     './albatross.js',
     'js/vendor.bundle.min.js': './albatross.js',
     'css/vendor.css': [
-      './node_modules/bootstrap/dist/css/bootstrap.css',
+      './node_modules/bootstrap/dist/css/bootstrap.min.css',
       './node_modules/adminlite/dist/css/styles.min.css'
     ],
   },
@@ -38,7 +38,14 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader'
+          use: {
+            loader: "css-loader",
+            options: {
+              alias: {
+                "../fonts/": "fonts/bootstrap/"
+              }
+            }
+          }
         })
       },
     //   {
