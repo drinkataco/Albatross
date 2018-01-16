@@ -6,13 +6,17 @@ const cssLoader = require('css-loader');
 const styleLoader = require('style-loader');
 const fileLoader = require('file-loader');
 
-
 module.exports = {
   context: path.resolve(__dirname, '.'),
   entry: {
+    // Main vendor JS
     'js/vendor.bundle.js':     './build/js/vendor.js',
     'js/vendor.bundle.min.js': './build/js/vendor.js',
+
+    // Bootstrap native bundle - needs to be appended
     'js/vendor.bootstrap.native.min.js': './build/js/vendor.bootstrap.native.js',
+
+    // Vendor CSS - already minified as from libraries
     'css/vendor.css': [
       './node_modules/bootstrap/dist/css/bootstrap.min.css',
       './node_modules/adminlite/dist/css/styles.min.css',
@@ -30,7 +34,7 @@ module.exports = {
 
   module: {
     rules: [
-      // transpile ES6/7 to ES5 via babel
+      // Transpile ES6/7 to ES5 via babel
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -38,6 +42,8 @@ module.exports = {
           presets: ['env']
         },
       },
+
+      // CSS/LESS/SASS extraction
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -66,6 +72,8 @@ module.exports = {
           ],
         })
       },
+
+      // Fonts/Images/Files extraction
       {
         test: /\.woff$/,
         loader: "url-loader?limit=10000&mimetype=application/font-woff&name=./build/fonts/[name].[hash].[ext]"
@@ -91,7 +99,7 @@ module.exports = {
       include: /\.min\.js$/,
       minimize: true
     }),
-    new ExtractTextPlugin('[name]')
+    new ExtractTextPlugin('[name]'),
   ],
 
   devtool: 'source-map',
