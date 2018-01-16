@@ -70,11 +70,11 @@ module.exports = {
       // Fonts/Images/Files extraction
       {
         test: /\.woff$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=./build/fonts/[name].[hash].[ext]',
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[hash].[ext]',
       },
       {
         test: /\.woff2$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff2&name=./build/fonts/[name].[hash].[ext]',
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff2&name=fonts/[name].[hash].[ext]',
       },
       {
         test: /\.(svg|gif|png)$/,
