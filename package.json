@@ -1,18 +1,28 @@
 {
   "name": "albatross",
   "version": "0.0.1",
-  "description": "Home Automation System",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "A Dashboard for your Smart Home",
+  "main": "build/js/albatross.js",
+  "repository": "git@github.com:drinkataco/Albatross.git",
   "author": "Josh Walwyn <me@joshwalwyn.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "load-grunt-tasks": "^3.5.2"
+    "AdminLite": "https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.8",
+    "eslint": "^4.15.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "velocity": "^0.7.2",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
   }
 }
