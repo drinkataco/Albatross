@@ -1,9 +1,6 @@
 // velocity-animation
 import Velocity from 'velocity-animate';
 
-// Bootstrap native
-import Bootstrap from 'bootstrap.native';
-
 // admin-lite
 import BoxRefresh from 'AdminLite/build/js/src/BoxRefresh';
 import BoxWidget from 'AdminLite/build/js/src/BoxWidget';
