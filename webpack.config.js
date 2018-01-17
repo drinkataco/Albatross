@@ -12,7 +12,6 @@ module.exports = {
   entry: {
     // Main vendor JS
     'js/vendor.bundle.js': './build/js/vendor.js',
-    'js/vendor.bundle.min.js': './build/js/vendor.js',
 
     // Bootstrap native bundle - needs to be appended
     'js/vendor.bootstrap.native.min.js': './build/js/vendor.bootstrap.native.js',
@@ -86,15 +85,7 @@ module.exports = {
       },
     ],
   },
-
-  // Uglify JS
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/,
-      minimize: true,
-    }),
     new ExtractTextPlugin('[name]'),
-  ],
-
-  devtool: 'source-map',
+  ]
 };

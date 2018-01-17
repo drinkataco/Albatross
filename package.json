@@ -22,11 +22,10 @@
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "velocity": "^0.7.2",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4",
-    "webpack-merge": "^4.1.1"
+    "webpack": "^3.8.1"
   },
   "scripts": {
-    "build-project": "webpack"
+    "build-project-dev": "webpack --config webpack.config.js",
+    "build-project-prod": "webpack --config webpack.config.js -p"
   }
 }
