@@ -429,21 +429,13 @@ var _ControlSidebar = __webpack_require__(7);
 
 var _ControlSidebar2 = _interopRequireDefault(_ControlSidebar);
 
-var _DirectChat = __webpack_require__(8);
-
-var _DirectChat2 = _interopRequireDefault(_DirectChat);
-
-var _Layout = __webpack_require__(9);
+var _Layout = __webpack_require__(8);
 
 var _Layout2 = _interopRequireDefault(_Layout);
 
-var _PushMenu = __webpack_require__(10);
+var _PushMenu = __webpack_require__(9);
 
 var _PushMenu2 = _interopRequireDefault(_PushMenu);
-
-var _TodoList = __webpack_require__(11);
-
-var _TodoList2 = _interopRequireDefault(_TodoList);
 
 var _Tree = __webpack_require__(1);
 
@@ -459,10 +451,8 @@ var binder = function binder() {
   _BoxRefresh2.default.bind();
   _BoxWidget2.default.bind();
   _ControlSidebar2.default.bind();
-  _DirectChat2.default.bind();
   _Layout2.default.bind();
   _PushMenu2.default.bind();
-  _TodoList2.default.bind();
   _Tree2.default.bind();
 }; // velocity-animation
 
@@ -6003,121 +5993,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/* DirectChat()
- * ===============
- * Toggles the state of the control sidebar
- *
- * @author Josh Walwyn <me@joshwalwyn.com>
- *
- * Adapted from Admin LTE DirectChat.js jQuery Plugin
- *
- * @Usage: new DirectChat(element, options)
- *         or add [data-widget="direct-chat"] to the trigger
- */
-var DirectChat = function () {
-  _createClass(DirectChat, null, [{
-    key: 'bind',
-
-    /**
-     * Binds listeners onto sidebar elements
-     */
-    value: function bind() {
-      Array.prototype.forEach.call(document.querySelectorAll(DirectChat.Selector.data), function (element) {
-        return new DirectChat(element);
-      });
-    }
-
-    /**
-     * Get options, call to set listeners
-     * @param {Object} element The main trigger element
-     * @param {Object|null} classNames list of classnames
-     * @param {Object|null} selectors list of dom selectors
-     */
-
-  }]);
-
-  function DirectChat(element, classNames, selectors) {
-    _classCallCheck(this, DirectChat);
-
-    // Add parameters to global scope
-    this.ClassName = classNames || DirectChat.ClassName;
-    this.Selector = selectors || DirectChat.Selector;
-
-    this.element = element;
-
-    this.setUpListener();
-  }
-
-  /**
-   * Set up event listeners
-   */
-
-
-  _createClass(DirectChat, [{
-    key: 'setUpListener',
-    value: function setUpListener() {
-      var _this = this;
-
-      this.element.addEventListener('click', function (e) {
-        _this.toggle();
-        e.preventDefault();
-      });
-    }
-
-    /**
-     * Toggle overlay
-     */
-
-  }, {
-    key: 'toggle',
-    value: function toggle() {
-      var mainBox = this.element.closest(this.Selector.box);
-
-      if (mainBox) {
-        mainBox.classList.toggle(this.ClassName.open);
-      }
-    }
-  }]);
-
-  return DirectChat;
-}();
-
-/**
- * Selectors for query selections
- * @type {Object}
- */
-
-
-DirectChat.Selector = {
-  data: '[data-widget="chat-pane-toggle"]',
-  box: '.direct-chat'
-};
-
-/**
- * DOM Class Names
- * @type {Object}
- */
-DirectChat.ClassName = {
-  open: 'direct-chat-contacts-open'
-};
-
-exports.default = DirectChat;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _Utilities = __webpack_require__(0);
 
 var _Utilities2 = _interopRequireDefault(_Utilities);
@@ -6363,7 +6238,7 @@ Layout.ClassName = {
 exports.default = Layout;
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6636,181 +6511,6 @@ PushMenu.ClassName = {
 };
 
 exports.default = PushMenu;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Utilities = __webpack_require__(0);
-
-var _Utilities2 = _interopRequireDefault(_Utilities);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/* TodoList()
- * =========
- * Converts a list into a todoList.
- *
- * @author Josh Walwyn <me@joshwalwyn.com>
- *
- * Adapted from Admin LTE TodoList.js jQuery Plugin
- *
- * @Usage: new TodoList(element, options)
- *         or add [data-widget="todo-list"] to the ul element
- *         Pass any option as data-option="value"
- */
-var TodoList = function () {
-  _createClass(TodoList, null, [{
-    key: 'bind',
-
-    /**
-     * Binds listeners onto sidebar elements
-     */
-    value: function bind() {
-      Array.prototype.forEach.call(document.querySelectorAll(TodoList.Selector.data), function (element) {
-        return new TodoList(element);
-      });
-    }
-
-    /**
-     * Binds Listeners to DOM
-     * @param {Object} element The main checkbox list element
-     * @param {Object|null} options list of options
-     * @param {Object|null} classNames list of classnames
-     * @param {Object|null} selectors list of dom selectors
-     */
-
-  }]);
-
-  function TodoList(element, options, classNames, selectors) {
-    _classCallCheck(this, TodoList);
-
-    // Add parameters to global scope
-    this.Default = TodoList.Default;
-    this.Selector = selectors || TodoList.Selector;
-    this.ClassName = classNames || TodoList.ClassName;
-
-    this.element = element;
-
-    // Set options here
-    this.options = _Utilities2.default.grabOptions(this.Default, options, this.element);
-
-    this.setUpListeners();
-  }
-
-  /**
-   * Set up event listeners
-   */
-
-
-  _createClass(TodoList, [{
-    key: 'setUpListeners',
-    value: function setUpListeners() {
-      var _this = this;
-
-      Array.prototype.forEach.call(this.element.querySelectorAll('input[type=checkbox]'), function (el) {
-        el.addEventListener('change', function () {
-          return _this.toggle(el);
-        });
-      });
-    }
-
-    /**
-     * Handle toggling of checkbox
-     * @param {Object} checkbox The Checkbox element
-     */
-
-  }, {
-    key: 'toggle',
-    value: function toggle(checkbox) {
-      var listElement = checkbox.closest('li');
-      listElement.classList.toggle(this.ClassName.done);
-
-      // Handle checked
-      if (checkbox.checked) {
-        this.check(checkbox);
-      } else {
-        this.uncheck(checkbox);
-      }
-    }
-
-    /**
-     * Handle check - call custom method if set
-     * @param {Object} checkbox The Checkbox element
-     */
-
-  }, {
-    key: 'check',
-    value: function check(checkbox) {
-      if (typeof this.options.onCheck === 'string') {
-        window[this.options.onCheck](checkbox);
-      } else {
-        this.options.onCheck.call(checkbox);
-      }
-    }
-
-    /**
-     * Handle uncheck - call custom method if set
-     * @param {Object} checkbox The Checkbox element
-     */
-
-  }, {
-    key: 'uncheck',
-    value: function uncheck(checkbox) {
-      if (typeof this.options.onUncheck === 'string') {
-        window[this.options.onUncheck](checkbox);
-      } else {
-        this.options.onUncheck.call(checkbox);
-      }
-    }
-  }]);
-
-  return TodoList;
-}();
-
-/**
- * Default Options
- * @type {Object}
- */
-
-
-TodoList.Default = {
-  onCheck: function onCheck(item) {
-    return item;
-  }, // pass as method name in data-attr
-  onUncheck: function onUncheck(item) {
-    return item;
-  } // pass as method name in data-attr
-};
-
-/**
- * Selectors for query selections
- * @type {Object}
- */
-TodoList.Selector = {
-  data: '[data-widget="todo-list"]'
-};
-
-/**
- * DOM Class Names
- * @type {Object}
- */
-TodoList.ClassName = {
-  done: 'done'
-};
-
-exports.default = TodoList;
 
 /***/ })
 /******/ ]);
