@@ -12,6 +12,8 @@ class LoginForm(forms.Form):
                                max_length=1000,
                                required=True,
                                widget=forms.PasswordInput())
+    remember_me = forms.BooleanField(required=False,
+                                     widget=forms.CheckboxInput())
     # Contains redirect info
     next_page = forms.CharField(required=True,
                                 widget=forms.HiddenInput())

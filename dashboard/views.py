@@ -42,6 +42,12 @@ def login_form(request):
                 next_page = (
                     request.POST['next'] if 'next' in request.POST.keys()
                     else '/')
+
+                # Set Remember Me
+                if ('remember_me' not in request.POST or
+                        request.POST['remember_me'] != 'on'):
+                    request.session.set_expiry(0)
+
                 return HttpResponseRedirect(next_page)
             else:
                 form.add_error('username', 'Authentication Error')
