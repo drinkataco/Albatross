@@ -14,7 +14,7 @@ module.exports = {
     'js/vendor.bundle.js': './build/js/vendor.js',
 
     // Bootstrap native bundle - needs to be appended
-    'js/vendor.bootstrap.native.min.js': './build/js/vendor.bootstrap.native.js',
+    'js/vendor.append.js': './build/js/vendor.append.js',
 
     // Vendor CSS - already minified as from libraries
     'css/vendor.css': [
@@ -24,6 +24,12 @@ module.exports = {
       './node_modules/font-awesome/css/font-awesome.min.css',
       './node_modules/ionicons/dist/css/ionicons.min.css',
     ],
+
+    // Main project JS
+    'js/albatross.bundle.js': './build/js/albatross.js',
+
+    // Main project SCSS
+    'css/albatross.css': './build/sass/albatross.scss',
   },
 
   output: {
