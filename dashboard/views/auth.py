@@ -1,36 +1,30 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth import authenticate, login
-from django.views.decorators.http import require_http_methods
+from django.views import View
 
-from .forms.login import *
+from dashboard.forms.login import *
 
 
-@require_http_methods(["GET"])
-def index(request):
+class Login(View):
     """
-    Main Dashboard Index
+        Handle the main Login
     """
-    template = loader.get_template('dashboard/pages/index.html')
-    context = {
-        'pageTitle': 'Index'
-    }
-    return HttpResponse(template.render(context, request))
+    response = {}
 
+    def get(self, request):
+        """
+            Load Login Form
+        """
+        self.response['form'] = LoginForm(None)
+        template = loader.get_template('dashboard/pages/login.html')
 
-@require_http_methods(["GET", "POST"])
-def login_form(request):
-    """
-    Handle Login Requests
-    """
-    context = {}
+        return HttpResponse(template.render(self.response, request))
 
-    # For GET, we just need to render the form
-    if request.method == 'GET':
-        form = LoginForm(None)
-
-    # For POST we need to validate and authenticate
-    elif request.method == 'POST':
+    def post(self, request):
+        """
+            Authenticate User
+        """
         form = LoginForm(request.POST)
 
         if form.is_valid():
@@ -39,11 +33,12 @@ def login_form(request):
 
             if user is not None and user.is_active:
                 login(request, user)
+
                 next_page = (
                     request.POST['next'] if 'next' in request.POST.keys()
                     else '/')
 
-                # Set Remember Me
+                # Set expiration if remember_me not set
                 if ('remember_me' not in request.POST or
                         request.POST['remember_me'] != 'on'):
                     request.session.set_expiry(0)
@@ -52,8 +47,8 @@ def login_form(request):
             else:
                 form.add_error('username', 'Authentication Error')
 
-    template = loader.get_template('dashboard/pages/login.html')
+        template = loader.get_template('dashboard/pages/login.html')
 
-    context['form'] = form
+        self.response['form'] = form
 
-    return HttpResponse(template.render(context, request))
+        return HttpResponse(template.render(self.response, request))
