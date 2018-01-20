@@ -7,7 +7,6 @@
   "author": "Josh Walwyn <me@joshwalwyn.com>",
   "license": "MIT",
   "devDependencies": {
-    "AdminLite": "https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -21,8 +20,11 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
-    "velocity": "^0.7.2",
     "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "AdminLite": "https://github.com/drinkataco/AdminLite.git#0946766f87a7adf8e9ef609bfaee00ac9554907f",
+    "velocity": "^0.7.2"
   },
   "scripts": {
     "build-project-dev": "webpack --config webpack.config.js",
