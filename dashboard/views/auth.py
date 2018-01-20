@@ -8,18 +8,23 @@ from dashboard.forms.login import *
 
 class Login(View):
     """
-        Handle the main Login
+    Handle the main Login
     """
+
     response = {}
+    """Response Object for View"""
+
+    login_template = loader.get_template('dashboard/pages/login.html')
+    """The Login Form Template"""
+
 
     def get(self, request):
         """
             Load Login Form
         """
         self.response['form'] = LoginForm(None)
-        template = loader.get_template('dashboard/pages/login.html')
 
-        return HttpResponse(template.render(self.response, request))
+        return HttpResponse(self.login_template.render(self.response, request))
 
     def post(self, request):
         """
@@ -47,8 +52,9 @@ class Login(View):
             else:
                 form.add_error('username', 'Authentication Error')
 
-        template = loader.get_template('dashboard/pages/login.html')
-
         self.response['form'] = form
 
-        return HttpResponse(template.render(self.response, request))
+        return HttpResponse(
+            self.login_template.render(self.response, request),
+            status=401
+        )
