@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build-project-dev": "webpack --config webpack.config.js",
-    "build-project-prod": "webpack --config webpack.config.js -p"
+    "build-project-prod": "webpack --config webpack.config.js -p",
+    "test": "./manage.py test dashboard.tests"
   }
 }
