@@ -24,6 +24,10 @@
 
 .login-box-body {
   border: 1px #dddddd solid;
-  @include box-shadow(10px, 10px, 19px,-2px, rgba(186,184,186,0.75));
+  box-shadow: 10px, 10px, 19px,-2px, rgba(186,184,186,0.75);
 }
 
+// Fix Social Button width
+.btn-social>:first-child {
+  width: 35px
+}
