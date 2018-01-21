@@ -35,6 +35,24 @@ class AuthTest(TestCase):
         self.assertEqual(self.request.user.is_authenticated(), False)
         self.assertEqual(response.status_code, 302)
 
+    def test_it_shouldnt_redirect_anon_from_login(self):
+        # GIVEN A unauthenticated user at the login page
+        self.request = self.factory.get('/login')
+        self.request.user = AnonymousUser()
+
+        # WHEN A request/response is processed
+        response = self.middleware.process_view(
+            self.request,
+            self.view,
+            [],
+            {}
+        )
+
+        # THEN The user shouldn't be authenticated, and the request
+        # should be redirected
+        self.assertEqual(self.request.user.is_authenticated(), False)
+        self.assertEqual(response, None)
+
     def test_it_shouldnt_redirect_user_to_login(self):
         # GIVEN A authenticated user
         self.request.user = User()
