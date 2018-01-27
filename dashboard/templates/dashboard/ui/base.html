@@ -9,10 +9,10 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <!-- Vendor CSS -->
-  <link rel="stylesheet" href="{% static "/css/vendor.css" %}">
+  <link rel="stylesheet" href="{% static "/dist/css/vendor.css" %}">
 
   <!-- Albatross CSS -->
-  <link rel="stylesheet" href="{% static "/css/albatross.css" %}">
+  <link rel="stylesheet" href="{% static "/dist/css/albatross.css" %}">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -25,10 +25,10 @@
   <![endif]-->
 
   <!-- Vendor JS -->
-  <script src="{% static "/js/vendor.bundle.js" %}"></script>
+  <script src="{% static "/dist/js/vendor.bundle.js" %}"></script>
 
   <!-- Albatross JS -->
-  <script src="{% static "/js/albatross.bundle.js" %}"></script>
+  <script src="{% static "/dist/js/albatross.bundle.js" %}"></script>
 </head>
 <body class="{% block bodyClass %}hold-transition sidebar-mini{% endblock %} skin-black">
 {% block content %}
@@ -36,6 +36,6 @@
 </div>
 <!-- /.login-box -->
 <!-- Bootstrap Native JS -->
-  <script src="{% static "/js/vendor.append.js" %}"></script>
+  <script src="{% static "/dist/js/vendor.append.js" %}"></script>
 </body>
 </html>

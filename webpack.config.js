@@ -33,7 +33,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'static'),
+    path: path.resolve(__dirname, 'static/dist'),
     filename: '[name]',
     publicPath: '../', // Fix URL Resolutions for CSS
   },
